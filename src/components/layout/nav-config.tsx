@@ -1,4 +1,4 @@
-import { Home, Info, Activity, Users, MapPin, Building2, Calendar, Newspaper, Mail, User, Settings } from 'lucide-react';
+import { Home, Info, Activity, Users, MapPin, Building2, Calendar, Newspaper, Mail, User, Settings, Shield } from 'lucide-react';
 
 export const navItems = [
   {
@@ -79,7 +79,7 @@ export const userNavItems = [
   {
     title: "Admin Dashboard",
     href: "/admin",
-    icon: <Settings className="h-4 w-4" />,
+    icon: <Shield className="h-4 w-4" />,
     roles: ['admin']
   }
 ];

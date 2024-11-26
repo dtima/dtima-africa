@@ -6,13 +6,13 @@ import Layout from '@/components/layout/Layout';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
-import { Users, UserCheck, UserX } from 'lucide-react';
+import { Users, UserCheck, UserX, Shield, Settings2 } from 'lucide-react';
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const { data: profiles, isLoading } = useQuery({
+  const { data: profiles, isLoading, refetch } = useQuery({
     queryKey: ['profiles'],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -42,19 +42,30 @@ const Dashboard = () => {
         title: "Success",
         description: "User role updated successfully",
       });
+      refetch();
     }
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <Layout>
+        <div className="container mx-auto px-4 py-8">
+          <div className="flex justify-center items-center h-64">
+            <p className="text-lg">Loading...</p>
+          </div>
+        </div>
+      </Layout>
+    );
   }
 
   return (
     <Layout>
       <div className="container mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-          <Button onClick={() => navigate('/admin/users/new')}>Add New User</Button>
+          <div className="flex items-center gap-2">
+            <Settings2 className="h-6 w-6" />
+            <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -80,11 +91,11 @@ const Dashboard = () => {
           </Card>
           <Card className="p-6">
             <div className="flex items-center gap-4">
-              <UserX className="h-8 w-8 text-red-500" />
+              <Shield className="h-8 w-8 text-blue-500" />
               <div>
-                <h3 className="text-xl font-semibold">Blocked Users</h3>
+                <h3 className="text-xl font-semibold">Admins</h3>
                 <p className="text-2xl font-bold">
-                  {profiles?.filter(p => p.role === 'blocked').length || 0}
+                  {profiles?.filter(p => p.role === 'admin').length || 0}
                 </p>
               </div>
             </div>
@@ -109,15 +120,45 @@ const Dashboard = () => {
                       <td className="py-3">
                         {profile.first_name} {profile.last_name}
                       </td>
-                      <td className="py-3">{profile.role}</td>
+                      <td className="py-3 capitalize">{profile.role || 'User'}</td>
                       <td className="py-3">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => navigate(`/admin/users/${profile.id}`)}
-                        >
-                          Edit
-                        </Button>
+                        <div className="flex gap-2">
+                          {profile.role !== 'admin' && (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => updateUserRole(profile.id, 'admin')}
+                            >
+                              Make Admin
+                            </Button>
+                          )}
+                          {profile.role === 'admin' && (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => updateUserRole(profile.id, 'user')}
+                            >
+                              Remove Admin
+                            </Button>
+                          )}
+                          {profile.role !== 'blocked' ? (
+                            <Button
+                              variant="destructive"
+                              size="sm"
+                              onClick={() => updateUserRole(profile.id, 'blocked')}
+                            >
+                              Block
+                            </Button>
+                          ) : (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => updateUserRole(profile.id, 'user')}
+                            >
+                              Unblock
+                            </Button>
+                          )}
+                        </div>
                       </td>
                     </tr>
                   ))}
