@@ -1,11 +1,15 @@
 import React from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, LogOut } from 'lucide-react';
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { Logo } from './Logo';
 import { navItems } from './nav-config';
+import { useAuth } from '@/components/auth/AuthProvider';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/components/ui/use-toast';
+import { useNavigate } from 'react-router-dom';
 
 interface MainNavProps {
   isMobileMenuOpen: boolean;
@@ -13,6 +17,19 @@ interface MainNavProps {
 }
 
 export const MainNav = ({ isMobileMenuOpen, setIsMobileMenuOpen }: MainNavProps) => {
+  const { user, profile } = useAuth();
+  const { toast } = useToast();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    toast({
+      title: "Signed out",
+      description: "You have been successfully signed out.",
+    });
+    navigate('/auth');
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4 py-4">
@@ -66,14 +83,37 @@ export const MainNav = ({ isMobileMenuOpen, setIsMobileMenuOpen }: MainNavProps)
 
           {/* Action Buttons */}
           <div className="flex items-center gap-4">
-            <div className="hidden sm:flex">
-              <Button variant="ghost" className="text-green-600 hover:text-green-700 hover:bg-green-50">
-                Sign In
-              </Button>
-              <Button className="bg-green-600 text-white hover:bg-green-700">
-                Join Us
-              </Button>
-            </div>
+            {user ? (
+              <div className="hidden sm:flex items-center gap-4">
+                <span className="text-sm text-gray-600">
+                  Welcome, {profile?.first_name || user.email}
+                </span>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={handleSignOut}
+                  className="text-gray-600"
+                >
+                  <LogOut className="h-5 w-5" />
+                </Button>
+              </div>
+            ) : (
+              <div className="hidden sm:flex">
+                <Button
+                  variant="ghost"
+                  className="text-green-600 hover:text-green-700 hover:bg-green-50"
+                  onClick={() => navigate('/auth')}
+                >
+                  Sign In
+                </Button>
+                <Button
+                  className="bg-green-600 text-white hover:bg-green-700"
+                  onClick={() => navigate('/auth')}
+                >
+                  Join Us
+                </Button>
+              </div>
+            )}
             
             <Button
               variant="ghost"
