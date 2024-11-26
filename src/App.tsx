@@ -36,26 +36,21 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
+            {/* Public routes */}
+            <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/about/mission" element={<Mission />} />
+            <Route path="/about/initiatives" element={<Initiatives />} />
+            <Route path="/about/impact" element={<Impact />} />
+            <Route path="/activities/platforms" element={<Platforms />} />
+            <Route path="/activities/training" element={<Training />} />
+            <Route path="/partners" element={<Partners />} />
+            <Route path="/coverage" element={<Coverage />} />
+            <Route path="/councils" element={<Councils />} />
             
             {/* Protected routes */}
-            <Route path="/" element={<ProtectedRoute><Index /></ProtectedRoute>} />
             <Route path="/admin/*" element={<ProtectedRoute allowedRoles={['admin']}><Dashboard /></ProtectedRoute>} />
             <Route path="/profile/*" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-            
-            {/* About routes */}
-            <Route path="/about/mission" element={<ProtectedRoute><Mission /></ProtectedRoute>} />
-            <Route path="/about/initiatives" element={<ProtectedRoute><Initiatives /></ProtectedRoute>} />
-            <Route path="/about/impact" element={<ProtectedRoute><Impact /></ProtectedRoute>} />
-            
-            {/* Activities routes */}
-            <Route path="/activities/platforms" element={<ProtectedRoute><Platforms /></ProtectedRoute>} />
-            <Route path="/activities/training" element={<ProtectedRoute><Training /></ProtectedRoute>} />
-            
-            {/* New routes */}
-            <Route path="/partners" element={<ProtectedRoute><Partners /></ProtectedRoute>} />
-            <Route path="/coverage" element={<ProtectedRoute><Coverage /></ProtectedRoute>} />
-            <Route path="/councils" element={<ProtectedRoute><Councils /></ProtectedRoute>} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
