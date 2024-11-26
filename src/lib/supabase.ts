@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import type { NewsItem } from '@/types/database.types';
 
 const supabaseUrl = 'https://ismqoohxdhxwbuskluwl.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlzbXFvb2h4ZGh4d2J1c2tsdXdsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI2MDkxMjYsImV4cCI6MjA0ODE4NTEyNn0.DVMbz83bfv2nZb2-NM9SCI4B46k1s7Akv1DiZSzJax0';
