@@ -4,35 +4,15 @@ import { motion } from "framer-motion";
 import { Globe, Users, Calendar, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { HeroSlider } from '@/components/home/HeroSlider';
+import { LatestNews } from '@/components/home/LatestNews';
 
 const Index = () => {
   return (
     <Layout>
       <div className="min-h-screen">
-        {/* Hero Section */}
-        <section className="hero-gradient min-h-[90vh] flex items-center justify-center section-spacing">
-          <div className="container container-padding">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-center max-w-3xl mx-auto"
-            >
-              <span className="inline-block px-4 py-1.5 mb-6 text-sm font-medium bg-accent rounded-full text-primary animate-fade-in">
-                Digital Transformation Initiative
-              </span>
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 text-primary text-balance animate-fade-up">
-                Empowering African Municipalities Through Digital Innovation
-              </h1>
-              <p className="text-lg md:text-xl text-secondary mb-8 max-w-2xl mx-auto text-balance">
-                Transforming local governance across Africa with cutting-edge digital solutions and capacity building.
-              </p>
-              <Button size="lg" className="animate-scale-up">
-                Learn More
-              </Button>
-            </motion.div>
-          </div>
-        </section>
+        {/* Hero Section with Slider */}
+        <HeroSlider />
 
         {/* Features Section */}
         <section className="section-spacing bg-muted">
@@ -129,6 +109,9 @@ const Index = () => {
             </div>
           </div>
         </section>
+
+        {/* Latest News Section */}
+        <LatestNews />
 
         {/* CTA Section */}
         <section className="section-spacing bg-primary text-white">
