@@ -74,6 +74,39 @@ export type Database = {
         }
         Relationships: []
       }
+      coverage_areas: {
+        Row: {
+          active_projects: number | null
+          country: string
+          created_at: string
+          id: string
+          name: string
+          population: number | null
+          region: string | null
+          updated_at: string
+        }
+        Insert: {
+          active_projects?: number | null
+          country: string
+          created_at?: string
+          id?: string
+          name: string
+          population?: number | null
+          region?: string | null
+          updated_at?: string
+        }
+        Update: {
+          active_projects?: number | null
+          country?: string
+          created_at?: string
+          id?: string
+          name?: string
+          population?: number | null
+          region?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       events: {
         Row: {
           council_id: string | null
@@ -164,6 +197,39 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      partners: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          logo_url: string | null
+          name: string
+          partnership_type: string | null
+          updated_at: string
+          website_url: string | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          logo_url?: string | null
+          name: string
+          partnership_type?: string | null
+          updated_at?: string
+          website_url?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          logo_url?: string | null
+          name?: string
+          partnership_type?: string | null
+          updated_at?: string
+          website_url?: string | null
+        }
+        Relationships: []
       }
       profiles: {
         Row: {
