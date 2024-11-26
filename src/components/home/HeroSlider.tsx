@@ -5,32 +5,72 @@ import { cn } from "@/lib/utils";
 
 const slides = [
   {
-    image: "/placeholder.svg",
-    title: "Digital Transformation",
-    description: "Empowering African municipalities through innovative digital solutions"
+    image: "/lovable-uploads/b3eeca37-e80c-47fd-bf07-4bd7720a6f1f.png",
+    title: "Building Digital Capacity",
+    description: "Empowering municipal leaders and staff through comprehensive digital training"
   },
   {
-    image: "/placeholder.svg",
-    title: "Building Capacity",
-    description: "Training and supporting local government staff"
+    image: "/lovable-uploads/28341fb5-adcf-4dc1-91d1-3b5b8f137816.png",
+    title: "Local Government Partnership",
+    description: "Collaborating with municipalities like Kette to drive digital transformation"
   },
   {
-    image: "/placeholder.svg",
-    title: "Fostering Innovation",
-    description: "Creating sustainable digital ecosystems across Africa"
+    image: "/lovable-uploads/3d0416ee-0ee4-445a-b693-98000aa9b7b3.png",
+    title: "Knowledge Sharing",
+    description: "Facilitating workshops and presentations to share digital best practices"
   }
 ];
+
+const SlideContent = ({ slide, isActive }: { slide: typeof slides[0], isActive: boolean }) => (
+  <div
+    className={cn(
+      "absolute inset-0 transition-opacity duration-1000",
+      isActive ? "opacity-100" : "opacity-0"
+    )}
+  >
+    <div className="absolute inset-0 bg-black/50 z-10" />
+    <img
+      src={slide.image}
+      alt={slide.title}
+      className="w-full h-full object-cover"
+    />
+    <div className="absolute inset-0 z-20 flex items-center justify-center text-white">
+      <div className="text-center space-y-4 max-w-3xl px-4">
+        <h1 className="text-4xl md:text-6xl font-bold animate-fade-up">
+          {slide.title}
+        </h1>
+        <p className="text-lg md:text-xl animate-fade-up">
+          {slide.description}
+        </p>
+      </div>
+    </div>
+  </div>
+);
+
+const NavigationDots = ({ currentSlide, totalSlides, onDotClick }: { 
+  currentSlide: number, 
+  totalSlides: number, 
+  onDotClick: (index: number) => void 
+}) => (
+  <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex gap-2">
+    {Array.from({ length: totalSlides }).map((_, index) => (
+      <button
+        key={index}
+        className={cn(
+          "w-2 h-2 rounded-full transition-all",
+          currentSlide === index ? "bg-white w-4" : "bg-white/50"
+        )}
+        onClick={() => onDotClick(index)}
+      />
+    ))}
+  </div>
+);
 
 export const HeroSlider = () => {
   const [currentSlide, setCurrentSlide] = React.useState(0);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
   React.useEffect(() => {
     const timer = setInterval(nextSlide, 5000);
@@ -40,30 +80,7 @@ export const HeroSlider = () => {
   return (
     <div className="relative h-[60vh] md:h-[80vh] overflow-hidden bg-gray-900">
       {slides.map((slide, index) => (
-        <div
-          key={index}
-          className={cn(
-            "absolute inset-0 transition-opacity duration-1000",
-            currentSlide === index ? "opacity-100" : "opacity-0"
-          )}
-        >
-          <div className="absolute inset-0 bg-black/50 z-10" />
-          <img
-            src={slide.image}
-            alt={slide.title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 z-20 flex items-center justify-center text-white">
-            <div className="text-center space-y-4 max-w-3xl px-4">
-              <h1 className="text-4xl md:text-6xl font-bold animate-fade-up">
-                {slide.title}
-              </h1>
-              <p className="text-lg md:text-xl animate-fade-up">
-                {slide.description}
-              </p>
-            </div>
-          </div>
-        </div>
+        <SlideContent key={index} slide={slide} isActive={currentSlide === index} />
       ))}
       
       <Button
@@ -84,18 +101,11 @@ export const HeroSlider = () => {
         <ChevronRight className="h-8 w-8" />
       </Button>
       
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex gap-2">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            className={cn(
-              "w-2 h-2 rounded-full transition-all",
-              currentSlide === index ? "bg-white w-4" : "bg-white/50"
-            )}
-            onClick={() => setCurrentSlide(index)}
-          />
-        ))}
-      </div>
+      <NavigationDots 
+        currentSlide={currentSlide} 
+        totalSlides={slides.length} 
+        onDotClick={setCurrentSlide}
+      />
     </div>
   );
 };
