@@ -21,10 +21,15 @@ import Impact from "./pages/about/Impact";
 import Platforms from "./pages/activities/Platforms";
 import Training from "./pages/activities/Training";
 
-// New pages
+// Main pages
 import Partners from "./pages/partners/Partners";
 import Coverage from "./pages/coverage/Coverage";
 import Councils from "./pages/councils/Councils";
+
+// Footer pages
+import Events from "./pages/footer/Events";
+import Articles from "./pages/footer/Articles";
+import Newsletter from "./pages/footer/Newsletter";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +52,11 @@ const App = () => (
             <Route path="/partners" element={<Partners />} />
             <Route path="/coverage" element={<Coverage />} />
             <Route path="/councils" element={<Councils />} />
+            
+            {/* Footer routes */}
+            <Route path="/events" element={<Events />} />
+            <Route path="/articles" element={<Articles />} />
+            <Route path="/newsletter" element={<Newsletter />} />
             
             {/* Protected routes */}
             <Route path="/admin/*" element={<ProtectedRoute allowedRoles={['admin']}><Dashboard /></ProtectedRoute>} />

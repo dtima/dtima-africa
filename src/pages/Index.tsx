@@ -6,15 +6,15 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { HeroSlider } from '@/components/home/HeroSlider';
 import { LatestNews } from '@/components/home/LatestNews';
+import { PartnersLogos } from '@/components/home/PartnersLogos';
+import { SocialShare } from '@/components/shared/SocialShare';
 
 const Index = () => {
   return (
     <Layout>
       <div className="min-h-screen">
-        {/* Hero Section with Slider */}
         <HeroSlider />
 
-        {/* Features Section */}
         <section className="section-spacing bg-muted">
           <div className="container container-padding">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -58,7 +58,6 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Activities Section */}
         <section className="section-spacing">
           <div className="container container-padding">
             <motion.div
@@ -110,10 +109,12 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Latest News Section */}
         <LatestNews />
 
-        {/* CTA Section */}
+        {/* Partners Logos Section */}
+        <PartnersLogos />
+
+        {/* CTA Section with Social Share */}
         <section className="section-spacing bg-primary text-white">
           <div className="container container-padding text-center">
             <motion.div
@@ -135,6 +136,7 @@ const Index = () => {
               >
                 Contact Us
               </Button>
+              <SocialShare />
             </motion.div>
           </div>
         </section>
