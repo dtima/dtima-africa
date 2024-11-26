@@ -2,7 +2,12 @@ import React from 'react';
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
-import { navItems } from './nav-config';
+import { navItems, userNavItems } from './nav-config';
+import { useAuth } from '@/components/auth/AuthProvider';
+import { LogOut } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/components/ui/use-toast';
+import { useNavigate } from 'react-router-dom';
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -10,6 +15,24 @@ interface MobileNavProps {
 }
 
 export const MobileNav = ({ isOpen, setIsOpen }: MobileNavProps) => {
+  const { user, profile } = useAuth();
+  const { toast } = useToast();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    toast({
+      title: "Signed out",
+      description: "You have been successfully signed out.",
+    });
+    navigate('/auth');
+    setIsOpen(false);
+  };
+
+  const filteredUserNavItems = userNavItems.filter(item => 
+    !item.roles || item.roles.includes(profile?.role || '')
+  );
+
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetContent side="left" className="w-full sm:w-[350px] pr-0">
@@ -48,6 +71,34 @@ export const MobileNav = ({ isOpen, setIsOpen }: MobileNavProps) => {
                 )}
               </div>
             ))}
+
+            {user && (
+              <>
+                <div className="h-px bg-border my-2" />
+                {filteredUserNavItems.map((item) => (
+                  <Button
+                    key={item.title}
+                    asChild
+                    variant="ghost"
+                    className="justify-start gap-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <a href={item.href}>
+                      {item.icon}
+                      {item.title}
+                    </a>
+                  </Button>
+                ))}
+                <Button
+                  variant="ghost"
+                  className="justify-start gap-2"
+                  onClick={handleSignOut}
+                >
+                  <LogOut className="h-4 w-4" />
+                  Sign Out
+                </Button>
+              </>
+            )}
           </div>
         </ScrollArea>
       </SheetContent>

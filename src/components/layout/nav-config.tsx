@@ -1,4 +1,4 @@
-import { Home, Info, Activity, Users, MapPin, Building2, Calendar, Newspaper, Mail } from 'lucide-react';
+import { Home, Info, Activity, Users, MapPin, Building2, Calendar, Newspaper, Mail, User, Settings } from 'lucide-react';
 
 export const navItems = [
   {
@@ -67,6 +67,20 @@ export const navItems = [
     title: "Councils",
     href: "/councils",
     icon: <Building2 className="h-4 w-4" />
+  }
+];
+
+export const userNavItems = [
+  {
+    title: "Profile",
+    href: "/profile",
+    icon: <User className="h-4 w-4" />
+  },
+  {
+    title: "Admin Dashboard",
+    href: "/admin",
+    icon: <Settings className="h-4 w-4" />,
+    roles: ['admin']
   }
 ];
 

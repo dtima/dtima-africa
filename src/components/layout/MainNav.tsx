@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { Logo } from './Logo';
-import { navItems } from './nav-config';
+import { navItems, userNavItems } from './nav-config';
 import { useAuth } from '@/components/auth/AuthProvider';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/components/ui/use-toast';
@@ -29,6 +29,10 @@ export const MainNav = ({ isMobileMenuOpen, setIsMobileMenuOpen }: MainNavProps)
     });
     navigate('/auth');
   };
+
+  const filteredUserNavItems = userNavItems.filter(item => 
+    !item.roles || item.roles.includes(profile?.role || '')
+  );
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -85,9 +89,21 @@ export const MainNav = ({ isMobileMenuOpen, setIsMobileMenuOpen }: MainNavProps)
           <div className="flex items-center gap-4">
             {user ? (
               <div className="hidden sm:flex items-center gap-4">
-                <span className="text-sm text-gray-600">
-                  Welcome, {profile?.first_name || user.email}
-                </span>
+                <NavigationMenu>
+                  <NavigationMenuList>
+                    {filteredUserNavItems.map((item) => (
+                      <NavigationMenuItem key={item.title}>
+                        <NavigationMenuLink
+                          href={item.href}
+                          className={cn(navigationMenuTriggerStyle(), "flex items-center gap-2")}
+                        >
+                          {item.icon}
+                          {item.title}
+                        </NavigationMenuLink>
+                      </NavigationMenuItem>
+                    ))}
+                  </NavigationMenuList>
+                </NavigationMenu>
                 <Button
                   variant="ghost"
                   size="icon"
