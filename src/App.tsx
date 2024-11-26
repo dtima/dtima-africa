@@ -10,6 +10,15 @@ import Auth from "./pages/Auth";
 import Dashboard from "./pages/admin/Dashboard";
 import Profile from "./pages/profile/Profile";
 
+// About pages
+import Mission from "./pages/about/Mission";
+import Initiatives from "./pages/about/Initiatives";
+import Impact from "./pages/about/Impact";
+
+// Activities pages
+import Platforms from "./pages/activities/Platforms";
+import Training from "./pages/activities/Training";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -42,6 +51,50 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <Profile />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* About Routes */}
+            <Route
+              path="/about/mission"
+              element={
+                <ProtectedRoute>
+                  <Mission />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/about/initiatives"
+              element={
+                <ProtectedRoute>
+                  <Initiatives />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/about/impact"
+              element={
+                <ProtectedRoute>
+                  <Impact />
+                </ProtectedRoute>
+              }
+            />
+
+            {/* Activities Routes */}
+            <Route
+              path="/activities/platforms"
+              element={
+                <ProtectedRoute>
+                  <Platforms />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/activities/training"
+              element={
+                <ProtectedRoute>
+                  <Training />
                 </ProtectedRoute>
               }
             />
