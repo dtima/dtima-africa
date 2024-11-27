@@ -77,32 +77,38 @@ export type Database = {
       coverage_areas: {
         Row: {
           active_projects: number | null
+          coordinates: unknown | null
           country: string
           created_at: string
           id: string
           name: string
           population: number | null
           region: string | null
+          supported_councils: number | null
           updated_at: string
         }
         Insert: {
           active_projects?: number | null
+          coordinates?: unknown | null
           country: string
           created_at?: string
           id?: string
           name: string
           population?: number | null
           region?: string | null
+          supported_councils?: number | null
           updated_at?: string
         }
         Update: {
           active_projects?: number | null
+          coordinates?: unknown | null
           country?: string
           created_at?: string
           id?: string
           name?: string
           population?: number | null
           region?: string | null
+          supported_councils?: number | null
           updated_at?: string
         }
         Relationships: []
@@ -147,6 +153,42 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      interviews: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          image_url: string | null
+          interviewee: string
+          position: string | null
+          published_at: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          interviewee: string
+          position?: string | null
+          published_at?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          interviewee?: string
+          position?: string | null
+          published_at?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
       }
       latest_news: {
         Row: {
@@ -257,6 +299,42 @@ export type Database = {
           id?: string
           last_name?: string | null
           role?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      success_stories: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          image_url: string | null
+          impact_metrics: Json | null
+          municipality: string
+          published_at: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          impact_metrics?: Json | null
+          municipality: string
+          published_at?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          impact_metrics?: Json | null
+          municipality?: string
+          published_at?: string
+          title?: string
           updated_at?: string
         }
         Relationships: []
