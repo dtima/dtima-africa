@@ -16,11 +16,10 @@ export const AnnouncementBanner = () => {
         .select('*')
         .eq('is_active', true)
         .order('created_at', { ascending: false })
-        .limit(1)
-        .single();
+        .limit(1);
       
-      if (error && error.code !== 'PGRST116') throw error;
-      return data;
+      if (error) throw error;
+      return data?.[0] || null;
     },
   });
 
