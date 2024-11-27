@@ -13,13 +13,14 @@ export const AnnouncementBanner = () => {
     queryFn: async () => {
       const { data, error } = await supabase
         .from('announcements')
-        .select('*')
+        .select()
         .eq('is_active', true)
         .order('created_at', { ascending: false })
-        .limit(1);
+        .limit(1)
+        .maybeSingle();
       
       if (error) throw error;
-      return data?.[0] || null;
+      return data;
     },
   });
 
