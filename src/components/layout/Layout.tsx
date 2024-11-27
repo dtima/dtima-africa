@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MainNav } from './MainNav';
 import { MobileNav } from './MobileNav';
 import { Footer } from './Footer';
+import { AnnouncementBanner } from '../announcements/AnnouncementBanner';
 import { cn } from '@/lib/utils';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
@@ -19,6 +20,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <AnnouncementBanner />
       <header
         className={cn(
           "sticky top-0 z-50 w-full transition-all duration-300",
