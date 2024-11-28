@@ -92,8 +92,8 @@ export const footerLinks = [
   {
     title: "Quick Links",
     items: [
-      { title: "About Us", href: "/about" },
-      { title: "Activities", href: "/activities" },
+      { title: "About Us", href: "/about/mission" },
+      { title: "Activities", href: "/activities/platforms" },
       { title: "Partners", href: "/partners" },
       { title: "Coverage", href: "/coverage" },
       { title: "Councils", href: "/councils" }

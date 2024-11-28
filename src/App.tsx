@@ -30,6 +30,13 @@ import Councils from "./pages/councils/Councils";
 import Events from "./pages/footer/Events";
 import Articles from "./pages/footer/Articles";
 import Newsletter from "./pages/footer/Newsletter";
+import Interviews from "./pages/footer/Interviews";
+import SuccessStories from "./pages/footer/SuccessStories";
+
+// Contact pages
+import Contact from "./pages/contact/Contact";
+import Partnerships from "./pages/contact/Partnerships";
+import Social from "./pages/contact/Social";
 
 const queryClient = new QueryClient();
 
@@ -57,6 +64,13 @@ const App = () => (
             <Route path="/events" element={<Events />} />
             <Route path="/articles" element={<Articles />} />
             <Route path="/newsletter" element={<Newsletter />} />
+            <Route path="/interviews" element={<Interviews />} />
+            <Route path="/success-stories" element={<SuccessStories />} />
+            
+            {/* Contact routes */}
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/contact/partnerships" element={<Partnerships />} />
+            <Route path="/social" element={<Social />} />
             
             {/* Protected routes */}
             <Route path="/admin/*" element={<ProtectedRoute allowedRoles={['admin']}><Dashboard /></ProtectedRoute>} />
