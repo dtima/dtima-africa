@@ -60,24 +60,36 @@ export type Database = {
         Row: {
           author_id: string | null
           content: string
+          council_id: string | null
           created_at: string
+          excerpt: string | null
+          featured_image_url: string | null
           id: string
+          status: string | null
           title: string
           updated_at: string
         }
         Insert: {
           author_id?: string | null
           content: string
+          council_id?: string | null
           created_at?: string
+          excerpt?: string | null
+          featured_image_url?: string | null
           id?: string
+          status?: string | null
           title: string
           updated_at?: string
         }
         Update: {
           author_id?: string | null
           content?: string
+          council_id?: string | null
           created_at?: string
+          excerpt?: string | null
+          featured_image_url?: string | null
           id?: string
+          status?: string | null
           title?: string
           updated_at?: string
         }
@@ -87,6 +99,13 @@ export type Database = {
             columns: ["author_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "articles_council_id_fkey"
+            columns: ["council_id"]
+            isOneToOne: false
+            referencedRelation: "councils"
             referencedColumns: ["id"]
           },
         ]
