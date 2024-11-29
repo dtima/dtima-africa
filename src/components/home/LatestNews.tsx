@@ -7,19 +7,19 @@ const newsItems = [
     title: "Digital Innovation Summit 2024",
     date: "2024-03-15",
     description: "Join us for our annual summit on digital transformation in African municipalities.",
-    image: "/placeholder.svg"
+    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"
   },
   {
     title: "New Partnership Announcement",
     date: "2024-03-10",
     description: "DTIMA partners with leading tech companies to accelerate digital transformation.",
-    image: "/placeholder.svg"
+    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d"
   },
   {
     title: "Success Story: Smart City Initiative",
     date: "2024-03-05",
     description: "How one municipality transformed its services through digital innovation.",
-    image: "/placeholder.svg"
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085"
   }
 ];
 
