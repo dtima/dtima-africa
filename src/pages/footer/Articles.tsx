@@ -18,6 +18,7 @@ const Articles = () => {
             location
           )
         `)
+        .eq('status', 'published')
         .order('created_at', { ascending: false });
       
       if (error) throw error;
@@ -28,18 +29,24 @@ const Articles = () => {
   return (
     <Layout>
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold mb-8">Council Articles & Insights</h1>
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold mb-4">Council Articles & Insights</h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Discover the latest developments and success stories from our member councils
+          </p>
+        </div>
+
         {isLoading ? (
           <div className="flex justify-center">
             <p>Loading articles...</p>
           </div>
         ) : (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {articles?.map((article) => (
-              <Card key={article.id} className="flex flex-col">
+              <Card key={article.id} className="flex flex-col h-full hover:shadow-lg transition-shadow">
                 {article.featured_image_url && (
                   <img 
-                    src={article.featured_image_url || '/placeholder.svg'} 
+                    src={article.featured_image_url} 
                     alt={article.title}
                     className="w-full h-48 object-cover rounded-t-lg"
                   />
@@ -50,7 +57,7 @@ const Articles = () => {
                   </div>
                   <CardTitle className="text-xl mb-2">{article.title}</CardTitle>
                   {article.councils && (
-                    <CardDescription>
+                    <CardDescription className="text-sm font-medium text-green-600">
                       {article.councils.name}, {article.councils.location}
                     </CardDescription>
                   )}
