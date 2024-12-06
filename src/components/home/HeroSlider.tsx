@@ -119,6 +119,7 @@ const HeroSlider = () => {
         onDotClick={setCurrentSlide}
       />
     </div>
+  );
 };
 
 export default HeroSlider;
