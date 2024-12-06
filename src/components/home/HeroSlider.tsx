@@ -21,31 +21,43 @@ const slides = [
   }
 ];
 
-const SlideContent = ({ slide, isActive }: { slide: typeof slides[0], isActive: boolean }) => (
-  <div
-    className={cn(
-      "absolute inset-0 transition-opacity duration-1000",
-      isActive ? "opacity-100" : "opacity-0"
-    )}
-  >
-    <div className="absolute inset-0 bg-black/50 z-10" />
-    <img
-      src={slide.image}
-      alt={slide.title}
-      className="w-full h-full object-cover"
-    />
-    <div className="absolute inset-0 z-20 flex items-center justify-center text-white">
-      <div className="text-center space-y-4 max-w-3xl px-4">
-        <h1 className="text-4xl md:text-6xl font-bold animate-fade-up">
-          {slide.title}
-        </h1>
-        <p className="text-lg md:text-xl animate-fade-up">
-          {slide.description}
-        </p>
+const SlideContent = ({ slide, isActive }: { slide: typeof slides[0], isActive: boolean }) => {
+  const [imageLoaded, setImageLoaded] = React.useState(false);
+
+  return (
+    <div
+      className={cn(
+        "absolute inset-0 transition-opacity duration-1000",
+        isActive ? "opacity-100" : "opacity-0"
+      )}
+    >
+      <div className="absolute inset-0 bg-black/50 z-10" />
+      <div
+        className={cn(
+          "absolute inset-0 bg-gray-200",
+          imageLoaded ? "opacity-0" : "opacity-100"
+        )}
+      />
+      <img
+        src={slide.image}
+        alt={slide.title}
+        className="w-full h-full object-cover"
+        loading="lazy"
+        onLoad={() => setImageLoaded(true)}
+      />
+      <div className="absolute inset-0 z-20 flex items-center justify-center text-white">
+        <div className="text-center space-y-4 max-w-3xl px-4">
+          <h1 className="text-4xl md:text-6xl font-bold animate-fade-up">
+            {slide.title}
+          </h1>
+          <p className="text-lg md:text-xl animate-fade-up">
+            {slide.description}
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const NavigationDots = ({ currentSlide, totalSlides, onDotClick }: { 
   currentSlide: number, 
@@ -66,7 +78,7 @@ const NavigationDots = ({ currentSlide, totalSlides, onDotClick }: {
   </div>
 );
 
-export const HeroSlider = () => {
+const HeroSlider = () => {
   const [currentSlide, setCurrentSlide] = React.useState(0);
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -107,5 +119,6 @@ export const HeroSlider = () => {
         onDotClick={setCurrentSlide}
       />
     </div>
-  );
 };
+
+export default HeroSlider;

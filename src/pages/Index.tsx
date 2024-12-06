@@ -1,19 +1,30 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import Layout from '@/components/layout/Layout';
 import { motion } from "framer-motion";
 import { Globe, Users, Calendar, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { HeroSlider } from '@/components/home/HeroSlider';
-import { LatestNews } from '@/components/home/LatestNews';
-import { PartnersLogos } from '@/components/home/PartnersLogos';
 import { SocialShare } from '@/components/shared/SocialShare';
+
+// Lazy load components
+const HeroSlider = React.lazy(() => import('@/components/home/HeroSlider'));
+const LatestNews = React.lazy(() => import('@/components/home/LatestNews'));
+const PartnersLogos = React.lazy(() => import('@/components/home/PartnersLogos'));
+
+// Loading fallback component
+const LoadingFallback = () => (
+  <div className="w-full h-48 animate-pulse bg-gray-200 rounded-lg flex items-center justify-center">
+    <p className="text-gray-500">Loading...</p>
+  </div>
+);
 
 const Index = () => {
   return (
     <Layout>
       <div className="min-h-screen">
-        <HeroSlider />
+        <Suspense fallback={<LoadingFallback />}>
+          <HeroSlider />
+        </Suspense>
 
         <section className="section-spacing bg-muted">
           <div className="container container-padding">
@@ -58,63 +69,14 @@ const Index = () => {
           </div>
         </section>
 
-        <section className="section-spacing">
-          <div className="container container-padding">
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="text-center mb-12"
-            >
-              <span className="inline-block px-4 py-1.5 mb-6 text-sm font-medium bg-accent rounded-full text-primary">
-                Our Activities
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Driving Digital Transformation
-              </h2>
-              <p className="text-secondary max-w-2xl mx-auto">
-                We focus on key areas to enable sustainable digital transformation in African municipalities.
-              </p>
-            </motion.div>
+        <Suspense fallback={<LoadingFallback />}>
+          <LatestNews />
+        </Suspense>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                {
-                  title: "Digital Platform Development",
-                  description: "Building robust digital solutions for municipal services"
-                },
-                {
-                  title: "Capacity Building",
-                  description: "Training and empowering municipal staff"
-                },
-                {
-                  title: "Innovation Challenges",
-                  description: "Fostering local tech innovation"
-                }
-              ].map((activity, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.2 }}
-                  viewport={{ once: true }}
-                >
-                  <Card className="p-8 glass-card h-full hover:shadow-lg transition-shadow">
-                    <h3 className="text-xl font-semibold mb-4">{activity.title}</h3>
-                    <p className="text-secondary">{activity.description}</p>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <Suspense fallback={<LoadingFallback />}>
+          <PartnersLogos />
+        </Suspense>
 
-        <LatestNews />
-
-        {/* Partners Logos Section */}
-        <PartnersLogos />
-
-        {/* CTA Section with Social Share */}
         <section className="section-spacing bg-primary text-white">
           <div className="container container-padding text-center">
             <motion.div

@@ -23,6 +23,38 @@ const newsItems = [
   }
 ];
 
+const NewsCard = ({ item }: { item: typeof newsItems[0] }) => {
+  const [imageLoaded, setImageLoaded] = React.useState(false);
+
+  return (
+    <Card className="overflow-hidden hover:shadow-lg transition-shadow">
+      <div className="relative h-48">
+        <div
+          className={cn(
+            "absolute inset-0 bg-gray-200 transition-opacity duration-300",
+            imageLoaded ? "opacity-0" : "opacity-100"
+          )}
+        />
+        <img
+          src={item.image}
+          alt={item.title}
+          className="w-full h-full object-cover"
+          loading="lazy"
+          onLoad={() => setImageLoaded(true)}
+        />
+      </div>
+      <div className="p-6">
+        <div className="flex items-center gap-2 text-gray-500 mb-3">
+          <Calendar className="h-4 w-4" />
+          <time>{new Date(item.date).toLocaleDateString()}</time>
+        </div>
+        <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+        <p className="text-gray-600">{item.description}</p>
+      </div>
+    </Card>
+  );
+};
+
 export const LatestNews = () => {
   return (
     <section className="py-16 bg-gray-50">
@@ -36,24 +68,12 @@ export const LatestNews = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {newsItems.map((item, index) => (
-            <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow">
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6">
-                <div className="flex items-center gap-2 text-gray-500 mb-3">
-                  <Calendar className="h-4 w-4" />
-                  <time>{new Date(item.date).toLocaleDateString()}</time>
-                </div>
-                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                <p className="text-gray-600">{item.description}</p>
-              </div>
-            </Card>
+            <NewsCard key={index} item={item} />
           ))}
         </div>
       </div>
     </section>
   );
 };
+
+export default LatestNews;
