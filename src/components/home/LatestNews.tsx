@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card } from "@/components/ui/card";
 import { Calendar } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const newsItems = [
   {
@@ -55,7 +56,7 @@ const NewsCard = ({ item }: { item: typeof newsItems[0] }) => {
   );
 };
 
-export const LatestNews = () => {
+const LatestNews = () => {
   return (
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
