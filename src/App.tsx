@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/components/auth/AuthProvider";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
@@ -50,33 +50,36 @@ const App = () => (
         <ErrorBoundary>
           <BrowserRouter>
             <Routes>
-            {/* Public routes */}
-            <Route path="/" element={<Index />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/about/mission" element={<Mission />} />
-            <Route path="/about/initiatives" element={<Initiatives />} />
-            <Route path="/about/impact" element={<Impact />} />
-            <Route path="/activities/platforms" element={<Platforms />} />
-            <Route path="/activities/training" element={<Training />} />
-            <Route path="/partners" element={<Partners />} />
-            <Route path="/coverage" element={<Coverage />} />
-            <Route path="/councils" element={<Councils />} />
-            
-            {/* Footer routes */}
-            <Route path="/events" element={<Events />} />
-            <Route path="/articles" element={<Articles />} />
-            <Route path="/newsletter" element={<Newsletter />} />
-            <Route path="/interviews" element={<Interviews />} />
-            <Route path="/success-stories" element={<SuccessStories />} />
-            
-            {/* Contact routes */}
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/contact/partnerships" element={<Partnerships />} />
-            <Route path="/social" element={<Social />} />
-            
-            {/* Protected routes */}
-            <Route path="/admin/*" element={<ProtectedRoute allowedRoles={['admin']}><Dashboard /></ProtectedRoute>} />
-            <Route path="/profile/*" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+              {/* Public routes */}
+              <Route path="/" element={<Index />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/about/mission" element={<Mission />} />
+              <Route path="/about/initiatives" element={<Initiatives />} />
+              <Route path="/about/impact" element={<Impact />} />
+              <Route path="/activities/platforms" element={<Platforms />} />
+              <Route path="/activities/training" element={<Training />} />
+              <Route path="/partners" element={<Partners />} />
+              <Route path="/coverage" element={<Coverage />} />
+              <Route path="/councils" element={<Councils />} />
+              
+              {/* Footer routes */}
+              <Route path="/events" element={<Events />} />
+              <Route path="/articles" element={<Articles />} />
+              <Route path="/newsletter" element={<Newsletter />} />
+              <Route path="/interviews" element={<Interviews />} />
+              <Route path="/success-stories" element={<SuccessStories />} />
+              
+              {/* Contact routes */}
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/contact/partnerships" element={<Partnerships />} />
+              <Route path="/social" element={<Social />} />
+              
+              {/* Protected routes */}
+              <Route path="/admin/*" element={<ProtectedRoute allowedRoles={['admin']}><Dashboard /></ProtectedRoute>} />
+              <Route path="/profile/*" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+              
+              {/* Catch-all route for 404 */}
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </BrowserRouter>
         </ErrorBoundary>
