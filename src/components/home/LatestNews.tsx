@@ -5,22 +5,22 @@ import { cn } from "@/lib/utils";
 
 const newsItems = [
   {
-    title: "Digital Innovation Summit 2024",
-    date: "2024-03-15",
-    description: "Join us for our annual summit on digital transformation in African municipalities.",
-    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b"
+    title: "Fostering Economic Growth: Digital Summit 2024",
+    date: "2024-02-29",
+    description: "Join key speakers including Charlie Martial NGOUNOU, Josefina Correa Gutierrez, and Gilbert Mbeh at the DTIMA Digital Summit focused on unleashing African municipalities' potential.",
+    image: "/lovable-uploads/5705d4f3-4b6c-4e03-89d3-41e7244e5eb0.png"
   },
   {
-    title: "New Partnership Announcement",
-    date: "2024-03-10",
-    description: "DTIMA partners with leading tech companies to accelerate digital transformation.",
-    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d"
+    title: "Garoua City Launches Digital Identity Initiative",
+    date: "2024-02-25",
+    description: "The iconic 'I Love Garoua City' landmark symbolizes the municipality's commitment to digital transformation and community engagement.",
+    image: "/lovable-uploads/700a006d-6cba-4274-a800-136908f4c3d0.png"
   },
   {
-    title: "Success Story: Smart City Initiative",
-    date: "2024-03-05",
-    description: "How one municipality transformed its services through digital innovation.",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+    title: "Invest in Garoua III: Partnership Opportunities",
+    date: "2024-02-20",
+    description: "Discover collaboration possibilities in agriculture, renewable energy, infrastructure, entrepreneurship, business services, and community development at the upcoming DTIMA event.",
+    image: "/lovable-uploads/a0b8c28d-1bc1-4131-b640-36c8e9d5cfd3.png"
   }
 ];
 
