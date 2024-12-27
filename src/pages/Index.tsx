@@ -5,6 +5,7 @@ import { Globe, Users, Calendar, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { SocialShare } from '@/components/shared/SocialShare';
+import { LoadingSpinner } from '@/components/shared/LoadingSpinner';
 
 // Lazy load components
 const HeroSlider = React.lazy(() => import('@/components/home/HeroSlider'));
@@ -13,8 +14,8 @@ const PartnersLogos = React.lazy(() => import('@/components/home/PartnersLogos')
 
 // Loading fallback component
 const LoadingFallback = () => (
-  <div className="w-full h-48 animate-pulse bg-gray-200 rounded-lg flex items-center justify-center">
-    <p className="text-gray-500">Loading...</p>
+  <div className="w-full h-48 flex items-center justify-center">
+    <LoadingSpinner size="large" />
   </div>
 );
 
