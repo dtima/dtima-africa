@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { HelmetProvider } from 'react-helmet-async';
+import { HelmetProvider, createHelmetContext } from 'react-helmet-async';
 import { AuthProvider } from './components/auth/AuthProvider';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { ErrorBoundary } from './components/shared/ErrorBoundary';
@@ -12,10 +12,11 @@ import Interviews from './pages/footer/Interviews';
 import Newsletter from './pages/footer/Newsletter';
 
 const queryClient = new QueryClient();
+const helmetContext = createHelmetContext();
 
 function App() {
   return (
-    <HelmetProvider>
+    <HelmetProvider context={helmetContext}>
       <ErrorBoundary>
         <QueryClientProvider client={queryClient}>
           <AuthProvider>
