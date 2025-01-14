@@ -12,11 +12,10 @@ import Interviews from './pages/footer/Interviews';
 import Newsletter from './pages/footer/Newsletter';
 
 const queryClient = new QueryClient();
-const helmetContext = { context: {} };
 
 function App() {
   return (
-    <HelmetProvider context={helmetContext}>
+    <HelmetProvider>
       <ErrorBoundary>
         <QueryClientProvider client={queryClient}>
           <AuthProvider>
