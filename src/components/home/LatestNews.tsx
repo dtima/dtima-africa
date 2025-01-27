@@ -2,29 +2,11 @@ import React from 'react';
 import { Card } from "@/components/ui/card";
 import { Calendar } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { LoadingSpinner } from '@/components/shared/LoadingSpinner';
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/lib/supabase';
 
-const newsItems = [
-  {
-    title: "Fostering Economic Growth: Digital Summit 2024",
-    date: "2024-02-29",
-    description: "Join key speakers including Charlie Martial NGOUNOU, Josefina Correa Gutierrez, and Gilbert Mbeh at the DTIMA Digital Summit focused on unleashing African municipalities' potential.",
-    image: "/lovable-uploads/5705d4f3-4b6c-4e03-89d3-41e7244e5eb0.png"
-  },
-  {
-    title: "Quality Housing Initiative Launched",
-    date: "2024-02-25",
-    description: "The city's housing plan is rooted in the belief that all residents should have access to safe, quality and affordable housing.",
-    image: "/lovable-uploads/3abb17dd-e48b-4e97-9e68-9c6db8b84cfb.png"
-  },
-  {
-    title: "Invest in Garoua III: Partnership Opportunities",
-    date: "2024-02-20",
-    description: "Discover collaboration possibilities in agriculture, renewable energy, infrastructure, entrepreneurship, business services, and community development at the upcoming DTIMA event.",
-    image: "/lovable-uploads/a0b8c28d-1bc1-4131-b640-36c8e9d5cfd3.png"
-  }
-];
-
-const NewsCard = ({ item }: { item: typeof newsItems[0] }) => {
+const NewsCard = ({ item }: { item: any }) => {
   const [imageLoaded, setImageLoaded] = React.useState(false);
 
   return (
@@ -37,7 +19,7 @@ const NewsCard = ({ item }: { item: typeof newsItems[0] }) => {
           )}
         />
         <img
-          src={item.image}
+          src={item.image_url}
           alt={item.title}
           className="w-full h-full object-cover"
           loading="lazy"
@@ -57,6 +39,44 @@ const NewsCard = ({ item }: { item: typeof newsItems[0] }) => {
 };
 
 const LatestNews = () => {
+  const { data: newsItems, isLoading, error } = useQuery({
+    queryKey: ['latest-news'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('latest_news')
+        .select('*')
+        .order('published_at', { ascending: false })
+        .limit(3);
+      
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  if (isLoading) {
+    return (
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="flex justify-center items-center h-64">
+            <LoadingSpinner size="large" />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center text-red-600">
+            <p>Error loading news: {error.message}</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -68,7 +88,7 @@ const LatestNews = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {newsItems.map((item, index) => (
+          {newsItems?.map((item, index) => (
             <NewsCard key={index} item={item} />
           ))}
         </div>
