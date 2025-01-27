@@ -5,6 +5,7 @@ import Layout from '@/components/layout/Layout';
 import { Card } from '@/components/ui/card';
 import { MapPin, Users, Activity } from 'lucide-react';
 import { LoadingSpinner } from '@/components/shared/LoadingSpinner';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 const Coverage = () => {
   const { data: areas, isLoading, error } = useQuery({
@@ -20,6 +21,30 @@ const Coverage = () => {
     },
   });
 
+  if (isLoading) {
+    return (
+      <Layout>
+        <div className="container mx-auto px-4 py-8">
+          <LoadingSpinner size="large" />
+        </div>
+      </Layout>
+    );
+  }
+
+  if (error) {
+    return (
+      <Layout>
+        <div className="container mx-auto px-4 py-8">
+          <Alert variant="destructive">
+            <AlertDescription>
+              Error loading coverage areas: {error.message}
+            </AlertDescription>
+          </Alert>
+        </div>
+      </Layout>
+    );
+  }
+
   return (
     <Layout>
       <div className="container mx-auto px-4 py-8">
@@ -30,19 +55,7 @@ const Coverage = () => {
           </p>
         </div>
 
-        {isLoading && (
-          <div className="flex justify-center items-center h-64">
-            <LoadingSpinner size="large" />
-          </div>
-        )}
-
-        {error && (
-          <div className="text-center text-red-600">
-            <p>Error loading coverage areas: {error.message}</p>
-          </div>
-        )}
-
-        {areas && (
+        {areas && areas.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {areas.map((area) => (
               <Card key={area.id} className="p-6 hover:shadow-lg transition-shadow">
@@ -77,6 +90,10 @@ const Coverage = () => {
                 </div>
               </Card>
             ))}
+          </div>
+        ) : (
+          <div className="text-center text-gray-500">
+            No coverage areas found.
           </div>
         )}
       </div>

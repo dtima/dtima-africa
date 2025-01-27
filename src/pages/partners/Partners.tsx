@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card';
 import { Globe2, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { LoadingSpinner } from '@/components/shared/LoadingSpinner';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 const Partners = () => {
   const { data: partners, isLoading, error } = useQuery({
@@ -21,6 +22,30 @@ const Partners = () => {
     },
   });
 
+  if (isLoading) {
+    return (
+      <Layout>
+        <div className="container mx-auto px-4 py-8">
+          <LoadingSpinner size="large" />
+        </div>
+      </Layout>
+    );
+  }
+
+  if (error) {
+    return (
+      <Layout>
+        <div className="container mx-auto px-4 py-8">
+          <Alert variant="destructive">
+            <AlertDescription>
+              Error loading partners: {error.message}
+            </AlertDescription>
+          </Alert>
+        </div>
+      </Layout>
+    );
+  }
+
   return (
     <Layout>
       <div className="container mx-auto px-4 py-8">
@@ -31,19 +56,7 @@ const Partners = () => {
           </p>
         </div>
 
-        {isLoading && (
-          <div className="flex justify-center items-center h-64">
-            <LoadingSpinner size="large" />
-          </div>
-        )}
-
-        {error && (
-          <div className="text-center text-red-600">
-            <p>Error loading partners: {error.message}</p>
-          </div>
-        )}
-
-        {partners && (
+        {partners && partners.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {partners.map((partner) => (
               <Card key={partner.id} className="p-6 hover:shadow-lg transition-shadow">
@@ -81,6 +94,10 @@ const Partners = () => {
                 )}
               </Card>
             ))}
+          </div>
+        ) : (
+          <div className="text-center text-gray-500">
+            No partners found.
           </div>
         )}
       </div>
