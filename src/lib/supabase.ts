@@ -30,6 +30,36 @@ export const fetchNewsByCategory = async (category: string) => {
   return data;
 };
 
+export const fetchPartners = async () => {
+  const { data, error } = await supabase
+    .from('partners')
+    .select('*')
+    .order('display_order', { ascending: true });
+
+  if (error) throw error;
+  return data;
+};
+
+export const fetchCoverageAreas = async () => {
+  const { data, error } = await supabase
+    .from('coverage_areas')
+    .select('*')
+    .order('name', { ascending: true });
+
+  if (error) throw error;
+  return data;
+};
+
+export const fetchCouncils = async () => {
+  const { data, error } = await supabase
+    .from('councils')
+    .select('*')
+    .order('name', { ascending: true });
+
+  if (error) throw error;
+  return data;
+};
+
 export const insertNewsItem = async (newsItem: Omit<NewsItem, 'id' | 'created_at' | 'updated_at'>) => {
   const { data, error } = await supabase
     .from('latest_news')

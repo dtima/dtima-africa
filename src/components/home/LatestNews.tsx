@@ -11,10 +11,10 @@ const newsItems = [
     image: "/lovable-uploads/5705d4f3-4b6c-4e03-89d3-41e7244e5eb0.png"
   },
   {
-    title: "Garoua City Launches Digital Identity Initiative",
+    title: "Quality Housing Initiative Launched",
     date: "2024-02-25",
-    description: "The iconic 'I Love Garoua City' landmark symbolizes the municipality's commitment to digital transformation and community engagement.",
-    image: "/lovable-uploads/700a006d-6cba-4274-a800-136908f4c3d0.png"
+    description: "The city's housing plan is rooted in the belief that all residents should have access to safe, quality and affordable housing.",
+    image: "/lovable-uploads/3abb17dd-e48b-4e97-9e68-9c6db8b84cfb.png"
   },
   {
     title: "Invest in Garoua III: Partnership Opportunities",
