@@ -1,0 +1,1 @@
+This directory will contain leader profile images. Replace with actual images before production. 

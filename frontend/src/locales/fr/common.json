@@ -1,0 +1,45 @@
+{
+  "navigation": {
+    "home": "Accueil",
+    "about": "À Propos",
+    "programs": "Programmes",
+    "councils": "Conseils & Couverture",
+    "resources": "Ressources",
+    "partners": "Partenaires",
+    "contact": "Contact"
+  },
+  "buttons": {
+    "learnMore": "En Savoir Plus",
+    "applyNow": "Postuler Maintenant",
+    "becomePartner": "Devenir Partenaire",
+    "viewAll": "Voir Tout",
+    "subscribe": "S'abonner",
+    "submit": "Soumettre",
+    "download": "Télécharger",
+    "readMore": "Lire Plus"
+  },
+  "footer": {
+    "copyright": "© {{year}} DTIMA. Tous droits réservés.",
+    "privacyPolicy": "Politique de Confidentialité",
+    "termsOfService": "Conditions d'Utilisation",
+    "accessibility": "Déclaration d'Accessibilité"
+  },
+  "error": {
+    "general": "Une erreur s'est produite. Veuillez réessayer.",
+    "notFound": "Page non trouvée",
+    "notFoundDescription": "La page que vous recherchez n'existe pas ou a été déplacée.",
+    "backToHome": "Retour à l'Accueil",
+    "serverError": "Erreur du Serveur",
+    "serverErrorDescription": "Nous rencontrons des difficultés techniques. Veuillez réessayer plus tard."
+  },
+  "loading": {
+    "general": "Chargement...",
+    "content": "Chargement du contenu...",
+    "submitting": "Soumission en cours..."
+  },
+  "seo": {
+    "defaultTitle": "DTIMA - Initiative de Transformation Numérique pour les Municipalités en Afrique",
+    "defaultDescription": "Autonomiser les municipalités africaines grâce à la transformation numérique",
+    "defaultKeywords": "transformation numérique, municipalités, Afrique, innovation, technologie"
+  }
+} 

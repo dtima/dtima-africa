@@ -1,0 +1,1 @@
+This directory will contain testimonial profile images. Replace with actual images before production. 

@@ -1,0 +1,22 @@
+{
+  "hero": {
+    "title": "Digital Transformation Initiative for Municipalities in Africa",
+    "subtitle": "Empowering African municipalities through digital technology and innovation",
+    "primaryCta": "Learn More",
+    "secondaryCta": "Our Programs",
+    "primaryCtaLink": "/about",
+    "secondaryCtaLink": "/programs"
+  },
+  "globalLeaders": {
+    "title": "What Global Leaders Say",
+    "subtitle": "Insights from global changemakers and thought leaders supporting digital transformation in Africa",
+    "prevButton": "Previous testimonial",
+    "nextButton": "Next testimonial"
+  },
+  "meetPartners": {
+    "title": "Meet Our Partners",
+    "subtitle": "Collaborating with leading organizations to drive digital transformation across Africa",
+    "viewAllText": "View All Partners",
+    "viewAllLink": "/partners"
+  }
+} 
