@@ -1,1 +1,0 @@
-This directory will contain partner logo images. Replace with actual images before production. 
